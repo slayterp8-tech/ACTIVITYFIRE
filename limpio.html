@@ -1,1 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="ACTIVITYFIRE - Servicio profesional de recarga, mantenimiento y venta de extintores a domicilio en Cúcuta. Cumplimos normas NTC y NFPA."/>
+  <title>ACTIVITYFIRE | Recarga y Mantenimiento de Extintores en Cúcuta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- tsParticles para efecto de partículas de fuego -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-fire@2/tsparticles.preset.fire.bundle.min.js"></script>
+  <style>
+    :root{
+      --primary: #ff4500;        /* Naranja/rojo fuego principal */
+      --secondary: #c41e3a;      /* Rojo intenso secundario */
+      --text-primary: #ffffff;   /* Texto blanco para contraste en negro */
+      --text-light: #dddddd;     /* Gris claro */
+      --bg-dark: #000000;        /* Fondo negro */
+      --card-bg: rgba(20,20,20,0.7); /* Tarjetas semi-transparentes */
+      --border: #333333;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Roboto',sans-serif;
+      color:var(--text-primary);
+      background:var(--bg-dark);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    #particles-js{
+      position:fixed;
+      width:100%;
+      height:100%;
+      top:0;
+      left:0;
+      z-index:-1;
+    }
+    header{
+      background:rgba(0,0,0,0.6);
+      backdrop-filter:blur(5px);
+      color:var(--text-primary);
+      padding:20px 5%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      width:100%;
+      z-index:1000;
+      box-shadow:0 4px 20px rgba(255,69,0,0.3);
+      border-bottom:3px solid var(--primary);
+    }
+    .logo{
+      font-family:'Montserrat',sans-serif;
+      font-size:2.5rem;
+      font-weight:800;
+      color:var(--primary);
+      text-shadow:0 0 10px var(--primary);
+    }
+    nav a{
+      color:var(--text-primary);
+      text-decoration:none;
+      margin:0 15px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    nav a:hover{
+      color:var(--primary);
+      text-shadow:0 0 8px var(--primary);
+    }
+    .whatsapp-fixed{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#25D366;
+      color:#fff;
+      width:60px;
+      height:60px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:2.5rem;
+      box-shadow:0 0 20px rgba(37,211,102,0.8);
+      z-index:999;
+      text-decoration:none;
+    }
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      text-align:center;
+      padding:120px 20px 80px;
+      position:relative;
+    }
+    .hero h1{
+      font-size:3.5rem;
+      margin-bottom:20px;
+      color:var(--primary);
+      text-shadow:0 0 20px var(--primary);
+    }
+    .hero p{
+      font-size:1.5rem;
+      max-width:800px;
+      margin:0 auto 40px;
+      color:var(--text-light);
+    }
+    .btn{
+      background:var(--primary);
+      color:#ffffff;
+      padding:15px 40px;
+      font-size:1.2rem;
+      border-radius:5px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+      border:2px solid var(--primary);
+      box-shadow:0 0 15px rgba(255,69,0,0.5);
+    }
+    .btn:hover{
+      background:var(--secondary);
+      border-color:var(--secondary);
+      box-shadow:0 0 30px rgba(196,30,58,0.7);
+    }
+    section{
+      padding:80px 5%;
+      text-align:center;
+      position:relative;
+      z-index:1;
+    }
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:30px;
+      margin-top:40px;
+    }
+    .service-card{
+      background:var(--card-bg);
+      backdrop-filter:blur(5px);
+      padding:30px;
+      border-radius:10px;
+      box-shadow:0 5px 20px rgba(255,69,0,0.2);
+      transition:0.3s;
+      border:2px solid var(--border);
+    }
+    .service-card:hover{
+      transform:translateY(-10px);
+      border-color:var(--primary);
+      box-shadow:0 10px 40px rgba(255,69,0,0.4);
+    }
+    .service-card img{
+      width:100%;
+      border-radius:10px;
+      margin-bottom:20px;
+      opacity:0.9;
+    }
+    .service-card h3{
+      color:var(--primary);
+      margin-bottom:15px;
+    }
+    .about{
+      background:var(--card-bg);
+      backdrop-filter:blur(5px);
+      padding:60px;
+      border-radius:15px;
+      max-width:900px;
+      margin:40px auto;
+      border:2px solid var(--border);
+    }
+    .about h2{
+      color:var(--primary);
+      margin-bottom:20px;
+    }
+    footer{
+      background:rgba(0,0,0,0.8);
+      color:var(--text-light);
+      padding:40px 5%;
+      text-align:center;
+      border-top:1px solid var(--border);
+    }
+    footer a{
+      color:var(--primary);
+      text-decoration:none;
+    }
+    @media(max-width:768px){
+      header{flex-direction:column;}
+      nav{margin-top:20px;}
+      nav a{display:block;margin:10px 0;}
+      .hero h1{font-size:2.8rem;}
+      .hero p{font-size:1.3rem;}
+      .logo{font-size:2rem;}
+    }
+  </style>
+</head>
+<body>
 
+  <!-- Contenedor para partículas de fuego -->
+  <div id="particles-js"></div>
+
+  <a href="https://wa.me/573022771677" class="whatsapp-fixed" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <header>
+    <div class="logo">ACTIVITYFIRE</div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div>
+      <h1>Recarga y Mantenimiento de Extintores a Domicilio en Cúcuta</h1>
+      <p>Servicio profesional, rápido y certificado. Protege tu hogar, empresa o vehículo con extintores en perfecto estado según normas NTC colombianas y NFPA.</p>
+      <a href="https://wa.me/573022771677" class="btn">Cotiza por WhatsApp ahora</a>
+    </div>
+  </section>
+
+  <section id="servicios">
+    <h2 style="color:var(--primary);margin-bottom:20px;">Nuestros Servicios</h2>
+    <p>Ofrecemos soluciones completas en seguridad contra incendios en Cúcuta.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="https://grupocasalima.com/wp-content/uploads/2023/08/Venta-y-Recarga-de-Extintores.webp" alt="Técnico recargando extintor a domicilio">
+        <h3>Recarga de Extintores</h3>
+        <p>Recarga de todo tipo: polvo químico seco (PQS), CO2, agua, espuma. Servicio anual obligatorio.</p>
+      </div>
+      <div class="service-card">
+        <img src="https://profuego.es/wp-content/uploads/2023/03/como-hacer-el-mantenimiento-de-mi-extintor-en-empresa-o-en-hogar-grupo-profuego.png" alt="Mantenimiento e inspección de extintores">
+        <h3>Mantenimiento e Inspección</h3>
+        <p>Revisión, prueba hidrostática (cada 5-12 años) y certificación según norma NTC 2885.</p>
+      </div>
+      <div class="service-card">
+        <img src="https://extintorespropama.com/wp-content/uploads/2018/05/EXTINTORES_PQS_001.jpg" alt="Venta y entrega de extintores nuevos">
+        <h3>Venta y Entrega a Domicilio</h3>
+        <p>Extintores nuevos para hogares, empresas y vehículos. Entrega gratis en Cúcuta.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros">
+    <div class="about">
+      <h2>¿Quiénes Somos?</h2>
+      <p><strong>ACTIVITYFIRE</strong> es una empresa especializada en recarga, mantenimiento y venta de extintores en Cúcuta. Contamos con técnicos certificados y cumplimos todas las normas de seguridad colombianas para garantizar tu protección.</p>
+      <p>
+        Teléfono / WhatsApp: <strong>+57 302 277 1677</strong><br>
+        Email: info@activityfire.com<br>
+        Cúcuta, Colombia
+      </p>
+      <p>¡Tu seguridad es nuestra prioridad!</p>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2 style="color:var(--primary);">Contáctanos</h2>
+    <p>Estamos listos para ayudarte. Respuesta inmediata por WhatsApp.</p>
+    <br>
+    <a href="https://wa.me/573022771677" class="btn">WhatsApp +57 302 277 1677</a>
+  </section>
+
+  <footer>
+    <p><a href="https://wa.me/573022771677">WhatsApp: +57 302 277 1677</a> | Cúcuta, Colombia</p>
+    <p>© 2025 ACTIVITYFIRE - Recarga y Mantenimiento de Extintores. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Inicializar partículas de fuego -->
+  <script>
+    (async () => {
+      await loadFirePreset(tsParticles);
+      await tsParticles.load("particles-js", {
+        preset: "fire",
+        background: {
+          color: "#000000"
+        },
+        particles: {
+          move: {
+            speed: 2
+          },
+          opacity: {
+            value: { min: 0.1, max: 0.8 }
+          }
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
